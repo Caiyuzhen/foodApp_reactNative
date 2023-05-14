@@ -1,6 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, TabBarIOS } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, TabBar, ActivityIndicator } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 export default class App extends React.Component {
 
@@ -32,15 +35,36 @@ export default class App extends React.Component {
 	}
 
 	render() {
-		// ‘🔥解构赋值’ 获取屏幕宽度, 跟 100% 一样
-		const { width } = Dimensions.get('window')
-		const itemWidth = (width - 24 ) / 2 //🔥表示左右间隔 24
-		const imgWidth = itemWidth - 12 //🔥表示图片左右间隔 8
+		const Tab = createBottomTabNavigator();
 		// alert(width)
+	
 
 		return (
-			<TabBarIOS>
-				<View style={styles.container}>
+			<NavigationContainer>
+				<Tab.Navigator>
+					<Tab.Screen name="Home">
+						{/* 👇把数据传递给组件 */}
+  						{() => <HomeScreen categories={this.state.categories} />}
+					</Tab.Screen>
+				</Tab.Navigator>
+			</NavigationContainer>
+		)
+	}
+}
+
+
+function HomeScreen(props) {
+
+	const { categories } = props; // 解构赋值从 props 中获取 categories 数据
+
+	const { width } = Dimensions.get('window') // ‘🔥解构赋值’ 获取屏幕宽度, 跟 100% 一样
+	const itemWidth = (width - 24 ) / 2 //🔥表示左右间隔 24
+	const imgWidth = itemWidth - 12 //🔥表示图片左右间隔 8
+
+
+	return (
+		<View style={styles.container}>
+			<View style={styles.container}>
 					<View>
 						{/* 修改顶部状态栏为白色 */}
 						<StatusBar style='light' />
@@ -56,7 +80,7 @@ export default class App extends React.Component {
 					<ScrollView style={styles.content}>
 						<View style={styles.list}>
 							{
-								this.state.categories.map((item) => {
+								categories.map((item) => {
 									return (
 										<View key={item.id} style={[{width: itemWidth}, styles.itemCard]} //左右 -20px, 然后再等分 3 份屏幕宽度
 										>
@@ -72,9 +96,9 @@ export default class App extends React.Component {
 						</View>
 					</ScrollView>
 				</View>
-			</TabBarIOS>
-		)
-	}
+		</View>
+	)
+
 }
 
 
