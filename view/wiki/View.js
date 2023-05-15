@@ -43,8 +43,8 @@ export default class Wiki extends React.Component {
 		return (
 			<View style={styles.container}>
 				<View>
-					{/* 修改顶部状态栏为白色 */}
-					<StatusBar style='light' />
+					{/* ⚡️修改顶部状态栏为白色, 在引入【路由库】后就可以去掉了！ */}
+					{/* <StatusBar style='light' />  */}
 					{/* 输入框 */}
 					<View>
 						{/* 🔥会自动的加载 2x 还是 3x */}

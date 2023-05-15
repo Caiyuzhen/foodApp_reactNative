@@ -61,7 +61,6 @@ export default class Home extends React.Component {
 				>
 					<MyDesign />
 				</TabNavigator.Item>
-
 			</TabNavigator>
 		)
 	}
