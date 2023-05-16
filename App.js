@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './view/home/View.js';
+import Wiki from './view/wiki/View.js';
 import MyDesign from './view/myDesign/View.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -22,15 +22,35 @@ export default class App extends React.Component {
 			<NavigationContainer>
 				{/* 🧭 堆栈式导航,  -> 配置默认渲染的路由组件 */}
 				<Stack.Navigator 
-					initialRouteName="Home"
+					initialRouteName="Wiki"
 				>
 					<Stack.Screen 
-						name="Home" 
-						component={Home} 
+						name="Wiki" 
+						component={Wiki} 
 						options={{
 							// header: () => null, // 设置为 null 隐藏导航栏 （整体控制）
 							// headerShown: false, //隐藏标题栏 （整体控制）
-							title: 'Home',
+							title: 'Wiki',
+							headerStyle: {
+								backgroundColor: 'rgba(255, 255, 255, 0)',
+								// 自定义导航栏高度
+							},
+							// headerTintColor: '#4736cd', //标题字颜色
+							// headerTitleStyle: {
+							// 	fontWeight: 'bold',
+							// },
+							headerTitle: (props) => (
+								<CustomHeaderTitle>{props.children}</CustomHeaderTitle>
+							),
+						}}
+					/>
+					<Stack.Screen 
+						name="MyDesign" 
+						component={MyDesign} 
+						options={{
+							// header: () => null, // 设置为 null 隐藏导航栏 （整体控制）
+							// headerShown: false, //隐藏标题栏 （整体控制）
+							title: 'My Design',
 							headerStyle: {
 								backgroundColor: 'rgba(255, 255, 255, 0)',
 								// 自定义导航栏高度

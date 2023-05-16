@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, ActivityIndicator, TouchableWithoutFeedback } from 'react-native';
 
 
 export default class Wiki extends React.Component {
@@ -58,15 +58,19 @@ export default class Wiki extends React.Component {
 					<View style={styles.list}>
 						{
 							categories.map((item) => {
+								// 每个食物的 card
 								return (
-									<View key={item.id} style={[{width: itemWidth}, styles.itemCard]} //左右 -20px, 然后再等分 3 份屏幕宽度
-									>
-										<Image 
-											source={{uri: item.imgUrl}} 
-											style={[{width: imgWidth, height: imgWidth}, styles.itemImg]} //🔥 图片的 url 要写成 uri ！
-										/>
-										<View ><Text style={styles.itemTitle}>{item.title}</Text></View>
-									</View>
+									// View 没法绑定点击事件
+									<TouchableWithoutFeedback>
+										<View key={item.id} style={[{width: itemWidth}, styles.itemCard]} //左右 -20px, 然后再等分 3 份屏幕宽度
+										>
+											<Image 
+												source={{uri: item.imgUrl}} 
+												style={[{width: imgWidth, height: imgWidth}, styles.itemImg]} //🔥 图片的 url 要写成 uri ！
+											/>
+											<View ><Text style={styles.itemTitle}>{item.title}</Text></View>
+										</View>
+									</TouchableWithoutFeedback>
 								)
 							})
 						}
