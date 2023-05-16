@@ -3,7 +3,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, ActivityIndicator, TouchableWithoutFeedback } from 'react-native';
 
 
-export default class Wiki extends React.Component {
+// 渲染卡片列表页
+export default class Feed extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -11,14 +12,17 @@ export default class Wiki extends React.Component {
 		}
 
 		this.handleGetListSucc = this.handleGetListSucc.bind(this) //🔥绑定 this 始终指向当前组件！
+		// this.handleFoodItemClick = this.handleFoodItemClick.bind(this) //可以在 onPress 中传递参数
 	}
 
 	// 请求数据
 	componentDidMount() {
-		fetch('http://www.abc.com/api/index.json')
+		fetch('http://192.16/api/index.json')
 		.then((res) => res.json())
 		.then(this.handleGetListSucc)
-		.catch(()=>{alert('请求异常')})
+		.catch(()=>{
+			alert('请求异常')
+		})
 	}
 
 	// 请求数据成功后的回调函数
@@ -29,6 +33,14 @@ export default class Wiki extends React.Component {
 			})
 		}
 		// alert(JSON.stringify(res))
+	}
+
+
+	// ⚡️ 页面跳转, 进入详情页
+	handleFoodItemClick (id) {
+		// const { navigate } = this.props.navigation 
+		// alert(id) //拿到每个点击页面的 id
+		this.props.navigate('Detail', {id: id}) //【第三步】 🔥🔥🔥 通过 Home 页传递过来的 navigate, 跳转到详情页! 并且把 id 传递给详情页
 	}
 
 	render() {
@@ -58,11 +70,12 @@ export default class Wiki extends React.Component {
 					<View style={styles.list}>
 						{
 							categories.map((item) => {
-								// 每个食物的 card
-								return (
-									// View 没法绑定点击事件
-									<TouchableWithoutFeedback>
-										<View key={item.id} style={[{width: itemWidth}, styles.itemCard]} //左右 -20px, 然后再等分 3 份屏幕宽度
+								return ( // 每个食物的 card
+									<TouchableWithoutFeedback 
+										key={item.id} // key 要绑定在最外层的元素上！
+										onPress={ this.handleFoodItemClick.bind(this, item.id) } // View 没法绑定点击事件, 所以要使用 TouchableWithoutFeedback
+									>
+										<View style={[{width: itemWidth}, styles.itemCard]} //左右 -20px, 然后再等分 3 份屏幕宽度
 										>
 											<Image 
 												source={{uri: item.imgUrl}} 
