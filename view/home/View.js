@@ -7,6 +7,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 // 核心是作为导航页
+/**
+ * Home -> Feed -> Detail
+ *      -> MyDesign -> Detail
+ */		
 export default class Home extends React.Component {
 	constructor(props) {
 		super(props)

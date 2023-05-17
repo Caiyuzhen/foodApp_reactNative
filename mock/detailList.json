@@ -3,17 +3,76 @@
 	"data": {
 		"list": [
 			{
-			"id": "0001",
-			"title": "汉堡"
-			}, {
+				"id": "0001",
+				"title": "详情页 A",
+				"desc": "Stories by Googlers on the people, product, and practice of UX at Google. For editorial content and more visit design.google",
+				"imgUrl": "https://images.unsplash.com/photo-1635403868664-179c789560a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1087&q=80"
+			}, 
+			{
 				"id": "0002",
-				"title": "薯条"
-			}, {
+				"title": "详情页 B",
+				"desc": "There's always tools on my radar in the productivity space. As someone who has reviewed well over 600+ productivity apps over 10 years, I tend to get interested in a handful at a time. For more, check out Keep Productive.",
+				"imgUrl": "https://images.unsplash.com/photo-1527067829737-402993088e6b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+			}, 
+			{
 				"id": "0003",
-				"title": "可乐"
-			}, {
+				"title": "详情页 C",
+				"desc": "Routine presents itself as a productivity hub for tasks, calendar and lighter notes. Right now, it is access only but the feel and opportunity of this application can only grow from here, but with some current limitations.",
+				"imgUrl": "https://images.unsplash.com/photo-1530669244764-0909211cd8e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80"
+			}, 
+			{
 				"id": "0004",
-				"title": "炸鸡"
+				"title": "详情页 D",
+				"desc": "Launched in the first wave of AI writer tools. I thought LEX was going to be a one-hit wonder, but they continue to develop and most excitingly it is created from a content company, Every.to. What's next for LEX?",
+				"imgUrl": "https://plus.unsplash.com/premium_photo-1671019820494-3af97f91c47c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80"
+			},
+			{
+				"id": "0005",
+				"title": "详情页 E",
+				"desc": "A note-taking application at heart, Capacities offers a unique approach to note organization in the form of “objects” — this object based note-taking makes AI become a potential best fit for this tool, with an “object studio” in the works too. A small team, with potential.",
+				"imgUrl": "https://images.unsplash.com/photo-1485254767195-60704c46702e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
+			},
+			{
+				"id": "0006",
+				"title": "详情页 F",
+				"desc": "The new entrance to the no-code space, with a twist — Loop Components. Microsoft Loop wants to come after Notion for their dominace on the market, it offers a select set of features for now, but could expand into more — with Loop Components, a living and breathing editable space that can be used across Microsoft 365 apps in-real-time, presenting the biggest opportunity for them.",
+				"imgUrl": "https://images.unsplash.com/photo-1523659833296-38a9c0e185af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80"
+			},
+			{
+				"id": "0007",
+				"title": "详情页 G",
+				"desc": "The arm of Coda developing AI based workspaces is really of interest to me, initially innovating in this space was Qatalog, but now Coda had come on the scene trying to remove time spent on templates, with building blocks. Coda AI excites me right now more than Notion AI thanks for the framework of packs and integrations it offers.",
+				"imgUrl": "https://images.unsplash.com/photo-1512134734790-9f5936895aba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=985&q=80"
+			},
+			{
+				"id": "0008",
+				"title": "详情页 H",
+				"desc": "In the Creators Companion, I created three separate channels, one for my blog, one for my YouTube Channel and one for my newsletter. Using the template, I can plan out my content, write drafts or scripts for videos and just generally organise it. I'm also able to validate it which is something that has helped me a lot!",
+				"imgUrl": "https://images.unsplash.com/photo-1498618388276-4c0cf89c15ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+			},
+			{
+				"id": "0009",
+				"title": "详情页 I",
+				"desc": "However having used Microsoft To Do (Previously known as Wunderlist), I think that I may migrate to it once my Todoist trial expires. I mean Microsoft To Do is free! It's also incredibly underrated and has some really useful features, something I will discuss in a future article.",
+				"imgUrl": "https://images.unsplash.com/photo-1485939420171-378de92ecd4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+			},
+			{
+				"id": "0010",
+				"title": "详情页 J",
+				"desc": "As a part-time content creator, I think that it is important to plan out my week so that I can maximise my productivity. Every Sunday spend around 10 to 15 minutes planning my entire week starting with the Inbox column which is where I put all the tasks that I need to work on at some point during the week. I then drag the tasks into the relevant days and prioritise them.",
+				"imgUrl": "https://images.unsplash.com/photo-1503776768674-0e612f631345?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+			},
+			{
+				"id": "0011",
+				"title": "详情页 K",
+				"desc": "Kanban Flow has been a staple app in my daily workflow for a very long time, but I guess I never really used it full-time. As the name states, the app is essentially a Kanban chart but it has other useful features built-in such as the ability to start a Pomodoro timer for each task and the ability to track your time.",
+				"imgUrl": "https://images.unsplash.com/photo-1513624954087-ca7109c0f710?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+			},
+			{
+				"id": "0012",
+				"title": "详情页 L",
+				"desc": "Over the last couple of years, I've used OneNote for many things such as note-taking during lectures and project work and it served me very well. At present, I use OneNote for the Organise and Distill parts of the CODE framework as well as a handful of other things including learning and a knowledge base.",
+				"imgUrl": "https://images.unsplash.com/photo-1507919981044-3b672b208db9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80"
 			}
 		]
 	}

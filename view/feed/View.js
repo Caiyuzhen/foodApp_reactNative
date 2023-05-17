@@ -4,6 +4,10 @@ import { StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, Activ
 
 
 // 渲染卡片列表页
+/**
+ * Home -> Feed -> Detail
+ *      -> MyDesign -> Detail
+ */		
 export default class Feed extends React.Component {
 	constructor(props) {
 		super(props)
@@ -46,6 +50,7 @@ export default class Feed extends React.Component {
 	render() {
 
 		const { width } = Dimensions.get('window') // ‘🔥解构赋值’ 获取屏幕宽度, 跟 100% 一样
+		const screenHeight = Dimensions.get('window').height //获取屏幕高度
 		const itemWidth = (width - 24 ) / 2 //🔥表示左右间隔 24
 		const imgWidth = itemWidth - 12 //🔥表示图片左右间隔 8
 		const bannerImg = require('../../resources/imgs/ice.webp')
@@ -67,7 +72,7 @@ export default class Feed extends React.Component {
 				</View>
 				{/* 滚动列表 */}
 				<ScrollView style={styles.content}>
-					<View style={styles.list}>
+					<View style={[{height: screenHeight * 1.62}, styles.list]}>
 						{
 							categories.map((item) => {
 								return ( // 每个食物的 card
