@@ -5,7 +5,8 @@ import Detail from './view/detailPage/View.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Text } from 'react-native'
-
+import { Provider } from 'react-redux'
+import store from './store/index.js'
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +21,7 @@ const CustomHeaderTitle = ({ children }) => {
  * Home -> Feed -> Detail
  *      -> MyDesign -> Detail
  */		
-export default class App extends React.Component {
+export class RouterApp extends React.Component {
 	render() {
 
 		return (
@@ -67,3 +68,16 @@ export default class App extends React.Component {
 		)	
 	}
 }
+
+
+// 最终返回的根 App
+const App = (props) => {
+	return (
+		// // 【🚀第三步】 全局传递 store, 包裹整个【顶层组件】
+		<Provider store={store}>
+			<RouterApp />
+		</Provider>
+	)
+}
+
+export default App

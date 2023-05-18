@@ -1,14 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, ActivityIndicator, TouchableWithoutFeedback } from 'react-native';
-
+import { connect } from 'react-redux'
+import styles from './style.js'
 
 // 渲染卡片列表页
 /**
  * Home -> Feed -> Detail
  *      -> MyDesign -> Detail
  */		
-export default class Feed extends React.Component {
+class Feed extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -21,7 +22,7 @@ export default class Feed extends React.Component {
 
 	// 请求数据
 	componentDidMount() {
-		fetch('http://192.16/api/index.json')
+		fetch('http://192.1/api/index.json')
 		.then((res) => res.json())
 		.then(this.handleGetListSucc)
 		.catch(()=>{
@@ -48,7 +49,7 @@ export default class Feed extends React.Component {
 	}
 
 	render() {
-
+		// alert(this.props.name) //🔥【🚀第六步】使用 store 内的公共数据！
 		const { width } = Dimensions.get('window') // ‘🔥解构赋值’ 获取屏幕宽度, 跟 100% 一样
 		const screenHeight = Dimensions.get('window').height //获取屏幕高度
 		const itemWidth = (width - 24 ) / 2 //🔥表示左右间隔 24
@@ -101,61 +102,17 @@ export default class Feed extends React.Component {
 
 
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#eee',
-	},
+// 🔥【🚀第四步】 定义从 store 取出数据的方法
+const mapStateToProps = (state) => {
+	return {
+		name: state.name
+	}
+  }
 
-	search: {
-		height: 48,
-		lineHeight: 16,
-		paddingLeft: 10, //控制 placeholder 的位置
-		backgroundColor: '#fff',
-		position: 'absolute',
-		left: 24,
-		right: 24,
-		borderRadius: 6,
-	},
+// 🔥【🚀第五步】 利用 connect 方法从 store 内取出数据, connect 表示和 store 建立联系
+export default connect(mapStateToProps, null)(Feed)
 
-	content: {
-		flex: 1,
-		backgroundColor: '#fff',
-		borderTopLeftRadius: 12,
-		borderTopRightRadius: 12,
-		marginTop: 40,
-		marginBottom: 0,
-		marginLeft: 0,
-		marginRight: 0,
-	},
 
-	list: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		flexDirection: 'row',
-		flexWrap: 'wrap', //🔥 超出区域做换行
-		marginTop: 24,
-	},
 
-	itemCard: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		// backgroundColor: '#333333',
-	},
-
-	itemImg: {
-		borderRadius: 12,
-	},
-
-	itemTitle: {
-		textAlign: 'center',
-		fontSize: 16,
-		lineHeight: 48,
-		height: 48,
-		fontWeight: 'bold',
-	},
-})
 
 
