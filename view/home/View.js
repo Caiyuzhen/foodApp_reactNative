@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native'
-import Feed from '../feed/View.js';
+import { Feed } from '../feed/index';
 import MyDesign from '../myDesign/View.js';
 import TabNavigator from 'react-native-tab-navigator'; //🔥使用第三方 Tab 模块能够更好的兼容 IOS 跟 Android
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

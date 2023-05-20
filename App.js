@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './view/home/View.js';
 import MyDesign from './view/myDesign/View.js';
-import Detail from './view/detailPage/View.js';
+import { DetailPage } from './view/detailPage/index.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Text } from 'react-native'
@@ -45,7 +45,7 @@ export class RouterApp extends React.Component {
 
 					<Stack.Screen 
 						name="Detail" 
-						component={Detail} 
+						component={DetailPage} 
 						options={{
 							title: 'Detail',
 							headerStyle: {

@@ -3,6 +3,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, ScrollView, ActivityIndicator, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux'
 import styles from './style.js'
+import { getSetCategoryAction } from './actionCreator.js' //🔥引入 action
+
 
 // 渲染卡片列表页 (这个组件尽量改写成为 UI 组件, 不要做太多业务逻辑的事, 所以最好可以把逻辑都写在 render 内)
 /* Home -> Feed -> Detail -> MyDesign -> Detail*/		
@@ -120,7 +122,7 @@ class Feed extends React.Component {
 // 定义从 store 取出数据的方法
 const mapState = (state) => {
 	return {
-		categories: state.FeedReducer.categories //组件内通过🌟 【state.FeedReducer.categories】 来获取数据
+		categories: state.FeedReducer.categories //组件内通过🌟 【state.FeedReducer.categories】 来获取数据, 因为在 store 内的 allReducer 定义的名称是 FeedReducer
 	}
 }
 
@@ -128,16 +130,17 @@ const mapState = (state) => {
 // 定义变更 store 数据的方法
 const mapDispatch = (dispatch) => {
 	return {
+		// 定义更改 reducer 的方法
 		setCategories(res) {
 			if(res.ret && res.data) {
-				// 发 action 来改变 store 内的数据
-				const action = {
-					type: 'SET_CATEGORIES',
-					data: res.data.categories //一开始是存在组件上的, 后面改成用 reducer 来管理
-				}
+				// const action = {
+				// 	type: 'SET_CATEGORIES',
+				// 	data: res.data.categories //一开始是存在组件上的, 后面改成用 reducer 来管理
+				// }
 
-				// 👉 派发 action, 转给 feed 的 reducer 处理
-				dispatch(action)
+				const action = getSetCategoryAction(res.data.categories)
+
+				dispatch(action)  // 👉 派发 action, 转给 feed 的 reducer 处理
 			}
 		}
 	}

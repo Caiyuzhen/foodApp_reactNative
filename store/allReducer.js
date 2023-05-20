@@ -15,10 +15,13 @@
 // 【🚀】改造过后, 相当于一个大的 reducer 集合, 【 👀 这个组件就是用来收集、组合所有子 reducer !!】
 import { combineReducers } from 'redux'
 import { reducer as FeedReducer } from '../view/feed/index.js'
+import { reducer as DetailPageReducer } from '../view/detailPage/index.js' //【🎈第 3 步】
 
 
-const allReducer = combineReducers({ //总的 reducer 集合
-	FeedReducer //组件内通过🌟 【state.FeedReducer.categories】 来获取数据
+//总的 reducer 集合
+const allReducer = combineReducers({ 
+	FeedReducer, //组件内通过🌟 【state.FeedReducer.categories】 来获取数据
+	DetailPageReducer
 })
 
 
