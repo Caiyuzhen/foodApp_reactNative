@@ -50,11 +50,11 @@ export default class DetailPage extends Component {
 
 	// 👋获取数据的方法
 	getListData() {
-		let url = 'http://192.1/api/index.json' 
+		let url = 'http://www.abc.com/api/index.json' 
 		// alert(this.props.route.params.id) //【第四步】🔥🔥🔥 React-Navigation 的方法, 【route.params】可以拿到携带的参数, 然后进一步的去请求更细的数据！
 		if(this.props.route.params.id) {
 			let id = this.props.route.params.id // 对应列表的 id
-			url = "http://192.1/api/detailList.json?id=" + id // 拼接 id, 请求对应的数据
+			url = "http://www.abc.com/api/detailList.json?id=" + id // 拼接 id, 请求对应的数据
 		}
 
 		// 请求详情页数据
