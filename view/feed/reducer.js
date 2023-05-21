@@ -1,6 +1,7 @@
 import { SET_CATEGORIES } from './actionTypes.js'
 
 
+//【逻辑层 - 数据处理的逻辑】
 // 【🚀】单独定义存储(此页涉及到的要存储的数据)
 const defaultState = {
 	categories: [] //在这里统一管理 feed 的 state
@@ -13,7 +14,6 @@ export default (state=defaultState, action) => { //组件内通过🌟 【state.
 		const newState = {
 			categories: [...action.data]
 		}
-
 		return newState
 	}
 
