@@ -40,6 +40,7 @@ const mapDispatch = (dispatch, ownProps) => { //ownProps 是父组件传递过�
 }
 
 
+// 👇 Redux 架构下生成视图层的方法！！！
 export default connect(mapState, mapDispatch)(DetailPage) //【🎈第 8 步】, 映射并导出组件
 
 

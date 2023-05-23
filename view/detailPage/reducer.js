@@ -8,7 +8,7 @@ const defaultState = {
 }
 
 
-// 🔥 reducer 的数据层, 相当于原先的 statue
+//🔥 reducer 的数据层, 相当于原先的 statue
 export default (state = defaultState, action) => { //接收的都是各处派发过来的 action ！
 	//【🎈第 8 步】处理接收过来的 action
 	if(action.type === CLEAN_LIST) { //🔥【清空数据】 先清空详情页, 再添加新的详情页数据
@@ -22,14 +22,14 @@ export default (state = defaultState, action) => { //接收的都是各处派发
 	else if(action.type === CHANGE_LIST) {//【🔥存入新的数据 - 请求后】
 		let newState = {}
 
-		if(coverDate) { //coverDate 表示是【覆盖】数据还是 【追加】数据
+		if(action.coverDate) { //⚡️ coverDate 用来判断 => 是【覆盖】数据还是 【追加】数据
 			newState = {
 				detailPage: [...action.detailPage], //🚀🚀 【覆盖】请求一组数据, 并入原来的老数组
 				refreshing: false
 			}
 		} else {
 			newState = {
-				detailPage: [...state.detailPage, ...action.detailPage], //🚀🚀 【追加】请求一组数据, 并入原来的老数组
+				detailPage: [...state.detailPage, ...action.detailPage], //🚀🚀 【追加】请求一组数据, 并入原来的老数组, 当【下拉刷新】时, 才追加！
 				refreshing: false
 			}
 		}
