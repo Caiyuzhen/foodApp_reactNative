@@ -7,7 +7,7 @@ import { DetailPage } from './Ui.js'
 
 
 
-//【容器层】
+//【容器层 - 负责触发一些逻辑】
 // 👇抽象出 fetch 请求 action 后的写法 ————————————————————————————————————————————————————————————————
 //【🎈第 6 步】 定义一个方法, 获取 reducer 内的 state
 const mapState = (state) => {
@@ -22,8 +22,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch, ownProps) => { //ownProps 是父组件传递过来的内容, 因为 mapDispatch 是在 connect 内的, 所以可以拿到父组件传递过来的内容
 	return {
 		// 定义更改 reducer 的方法 - 获得列表
-		getListData() {
-			const action = getDetailPageInfoAction(ownProps.route.params)
+		getListData() { //首次加载
+			const action = getDetailPageInfoAction(ownProps.route.params, true) //true 表示盖掉以前的数据
 			dispatch(action) //this.props.route.params
 		},
 
@@ -33,7 +33,7 @@ const mapDispatch = (dispatch, ownProps) => { //ownProps 是父组件传递过�
 			let action = freshDetailPageAction(true)
 			dispatch(action) //this.props.route.params, 派发 action 给到 detailPage 的 reducer （下拉刷新数据）
 
-			action = getDetailPageInfoAction(ownProps.route.params) // 请求新的数据
+			action = getDetailPageInfoAction(ownProps.route.params, false) // 请求新的数据, false 表示不覆盖以前的内容
 			dispatch(action) //this.props.route.params
 		}
 	}
