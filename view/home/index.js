@@ -1,5 +1,5 @@
-import reducer from "./reducer";
-import View from "./View";
+import reducer from "./reducer.js";
+import Home from "./View.js";
 
 
-export { View, reducer }
+export { Home, reducer }

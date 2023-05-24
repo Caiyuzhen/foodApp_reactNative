@@ -1,0 +1,1 @@
+export const ChangeSelectedTab = 'home/CHANGE_SELECTED_TAB'
