@@ -1,17 +1,5 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
-// import { styles } from './style.js'
+import { connect } from 'react-redux';
+import Settings from './Ui';
 
 
-export default class Settings extends Component {
-	render() {
-		return (
-			<View>
-				<Text>
-					hey
-				</Text>
-			</View>
-		)
-	}
-}
-
+export default connect(null, null)(Settings)

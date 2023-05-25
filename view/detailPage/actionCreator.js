@@ -35,7 +35,7 @@ export const changeDetailPageInfoAction = (resData, isFresh, coverDate) => {
 
 export const getDetailPageInfoAction = (navigation, coverDate) => { //coverDate 表示是否覆盖数据
 	return (dispatch) => { //异步请求的操作放到 actionCreator 内进行管理
-		let url = 'http://192.168.1.3/index.json' 
+		let url = '' 
 
 		if(navigation) {
 			let id = navigation.id // 从路由中拿到对应列表的 id (🔥 在 detailPage -> mapDispatch -> getListData 内进行传递)

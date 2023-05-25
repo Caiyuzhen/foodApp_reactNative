@@ -4,7 +4,7 @@ import { Feed } from '../feed/index';
 import MyDesign from '../myDesign/View.js';
 import TabNavigator from 'react-native-tab-navigator'; //🔥使用第三方 Tab 模块能够更好的兼容 IOS 跟 Android
 import { View as FoodMap } from '../map/index.js'
-import { HotList } from '../hotList/index.js';
+import { HotList } from '../hotList/index.js'
 import { View as Settings } from '../settings/index.js'
 
 
@@ -24,13 +24,36 @@ export default class Home extends React.Component {
 
 	render() {
 		const homeIcon = require('../../resources/icon/home.png')
-		const myDesignIcon = require('../../resources/icon/myDesign.png')
 		const homeIconSelected = require('../../resources/icon/homeSelected.png')
+		const hotListIcon = require('../../resources/icon/hotList.png')
+		const hotListIconSelected = require('../../resources/icon/hotListSelected.png')
+		const myDesignIcon = require('../../resources/icon/myDesign.png')
 		const myDesignIconSelected = require('../../resources/icon/myDesignSelected.png')
 		const foodMapIcon = require('../../resources/icon/foodMap.png')
 		const foodMapIconSelected = require('../../resources/icon/foodMapSelected.png')
 		const settingIcon = require('../../resources/icon/setting.png')
 		const settingIconSelected = require('../../resources/icon/settingSelected.png')
+
+		const nearItem = null 
+		if(this.props.showNear) { //【👀 新增一个配置数据  -  第 3 步】
+			nearItem = <TabNavigator.Item
+					selected={this.props.selectedTab === 'FoodMap'}
+					title='FoodMap'
+					renderIcon={ ()=> <Image source={foodMapIcon} style={{width: 24, height: 24}}/>} //icon 的位置
+					renderSelectedIcon={() => <Image source={foodMapIconSelected} style={{ width: 24, height: 24}} />} // 设置选中态的图标及颜色
+					// onPress={() => this.setState({ selectedTab: 'FoodMap' })}
+					onPress={ ()=>this.props.changeSelectedTab('FoodMap') }
+					selectedTitleStyle={{ // tab 选中态的颜色
+						color: '#4736cd',
+						fontWeight: 'bold'
+					}}
+					titleStyle={{
+						marginBottom: 44, // 文字向上偏移
+					}}
+				>
+					<FoodMap />
+				</TabNavigator.Item>
+		}
 
 		return (
 			// 底部导航栏
@@ -66,19 +89,18 @@ export default class Home extends React.Component {
 				<TabNavigator.Item
 					selected={this.props.selectedTab === 'HotList'} //左边能用 props 是因为绑定了 reducer!
 					title='HotList'
-					renderIcon={ ()=> <Image source={homeIcon} style={{width: 24, height: 24}}/>} //icon 的位置
-					renderSelectedIcon={() => <Image source={homeIconSelected} style={{ width: 24, height: 24}} />} // 设置选中态的图标及颜色
+					renderIcon={ ()=> <Image source={hotListIcon} style={{width: 24, height: 24}}/>} //icon 的位置
+					renderSelectedIcon={() => <Image source={hotListIconSelected} style={{ width: 24, height: 24}} />} // 设置选中态的图标及颜色
 					onPress={ ()=>this.props.changeSelectedTab('HotList') }
 					selectedTitleStyle={{
 						color: '#4736cd',
 						fontWeight: 'bold'
 					}}
-					badgeText={1}
 					titleStyle={{
 						marginBottom: 44, // 文字向上偏移
 					}}
 				>
-					<HotList navigate={this.props.navigation.navigate}/> 
+					<HotList/> 
 				</TabNavigator.Item>
 
 				<TabNavigator.Item
@@ -98,23 +120,8 @@ export default class Home extends React.Component {
 					<MyDesign />
 				</TabNavigator.Item>
 
-				<TabNavigator.Item
-					selected={this.props.selectedTab === 'FoodMap'}
-					title='FoodMap'
-					renderIcon={ ()=> <Image source={foodMapIcon} style={{width: 24, height: 24}}/>} //icon 的位置
-					renderSelectedIcon={() => <Image source={foodMapIconSelected} style={{ width: 24, height: 24}} />} // 设置选中态的图标及颜色
-					// onPress={() => this.setState({ selectedTab: 'FoodMap' })}
-					onPress={ ()=>this.props.changeSelectedTab('FoodMap') }
-					selectedTitleStyle={{ // tab 选中态的颜色
-						color: '#4736cd',
-						fontWeight: 'bold'
-					}}
-					titleStyle={{
-						marginBottom: 44, // 文字向上偏移
-					}}
-				>
-					<FoodMap />
-				</TabNavigator.Item>
+				{/* 地图页 */}
+				{nearItem}
 
 				<TabNavigator.Item
 					selected={this.props.selectedTab === 'Settings'}

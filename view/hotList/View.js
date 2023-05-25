@@ -1,7 +1,8 @@
-
 import { connect } from 'react-redux' 
 import { freshDetailPageAction, getDetailPageInfoAction } from './actionCreator.js' //抽象出来的的 action
-import { HotList } from './Ui.js'
+// import { HotList } from '../../common/list/Ui.js'
+// import { HotList } from './Ui.js'
+import { HotList } from '../../common/list/Ui.js'
 
 
 
@@ -20,7 +21,7 @@ const mapDispatch = (dispatch, ownProps) => { //ownProps 是父组件传递过�
 		// 定义更改 reducer 的方法 - 获得列表
 		getListData() { //首次加载
 			// alert('请求详情页数据成功-')
-			const action = getDetailPageInfoAction(ownProps.route.params, true) //true 表示盖掉以前的数据
+			const action = getDetailPageInfoAction(true) //true 表示盖掉以前的数据
 			dispatch(action) //this.props.route.params
 		},
 
@@ -30,7 +31,7 @@ const mapDispatch = (dispatch, ownProps) => { //ownProps 是父组件传递过�
 			let action = freshDetailPageAction(true)
 			dispatch(action) //this.props.route.params, 派发 action 给到 detailPage 的 reducer （下拉刷新数据）
 
-			action = getDetailPageInfoAction(ownProps.navigation, false) // 请求新的数据, false 表示不覆盖以前的内容
+			action = getDetailPageInfoAction(false) // 请求新的数据, false 表示不覆盖以前的内容
 			dispatch(action) //this.props.route.params
 		}
 	}

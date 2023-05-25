@@ -33,16 +33,16 @@ export const changeDetailPageInfoAction = (resData, isFresh, coverDate) => {
 
 
 
-export const getDetailPageInfoAction = (navigation, coverDate) => { //coverDate 表示是否覆盖数据
+export const getDetailPageInfoAction = (coverDate) => { //coverDate 表示是否覆盖数据
 	return (dispatch) => { //异步请求的操作放到 actionCreator 内进行管理
-		let url = 'http://192.168.1.3/index.json' 
+		let url = 'http://192.168.1.3/api/detailList.json' 
 
 		// 请求详情页数据
 		fetch(url)
 			.then(res => res.json())
 			.then( (res)=>{ 
 				if(res.ret && res.data) { //👈 派发 action 给 reducer 进行处理
-					alert('请求详情页数据成功-2')
+					// alert('请求详情页数据成功-2')
 					const action = changeDetailPageInfoAction(res.data.list, false, coverDate) //全部显示 card
 					dispatch(action)  //派发 action 给到 detailPage 的 reducer
 				}
