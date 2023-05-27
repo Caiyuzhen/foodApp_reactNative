@@ -6,6 +6,7 @@ import TabNavigator from 'react-native-tab-navigator'; //🔥使用第三方 Tab
 import { View as FoodMap } from '../map/index.js'
 import { HotList } from '../hotList/index.js'
 import { View as Settings } from '../settings/index.js'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 // 核心是作为导航页
@@ -21,6 +22,16 @@ export default class Home extends React.Component {
 		// }
 		// alert(this.props.navigation) //🔥🔥🔥 因为 home 页定义了路由（在 App.js 中定义）, 因此可以通过 this.props.navigation 获取路由对象！！
 	}
+
+
+	// ⚡️获取本地存储 localStorage 的数据 （是否显示 FoodMap 的数据）
+	componentDidMount() {
+		AsyncStorage.getItem('NearSwitch').then((value) => { //从本地存储中取出 value
+			// alert(value)
+			this.props.changeNearStatus(value)// 🌟 把本地存储的数据同步给 reducer
+		})
+	}
+
 
 	render() {
 		const homeIcon = require('../../resources/icon/home.png')

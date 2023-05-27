@@ -1,6 +1,7 @@
 import Home from './Ui.js';
 import { connect } from 'react-redux';
 import { changeSelectedTab } from './actionCreator.js'
+import { settingActionCreator } from '../settings/index.js'
 
 
 // 操作 reducer 的方法
@@ -16,6 +17,13 @@ const mapDispatch = (dispatch) => ({
 		// alert(type)
 		const action = changeSelectedTab(type)
 		dispatch(action) //action 转发给 store, store 转发给局部的 reducer
+	},
+
+	// 把取出来本地存储的数据同步给 store 的方法
+	changeNearStatus(localValue) {
+		localValue = localValue === 'true' ? true : false
+		const action = settingActionCreator.getSwitchChangeAction(localValue) //借用 setting 的 actionCreator 来派发 action, 实现 reducer 的转发
+		dispatch(action)
 	}
 })
 

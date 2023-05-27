@@ -12,6 +12,7 @@ export default class Settings extends Component {
 
 		return (
 			<View style={styles.container}>
+				<Text style={styles.mainTitle}>Setting</Text> 
 				<View style={styles.wrapper}>
 					<Text style={styles.title}>Turn On myDeesign Page</Text> 
 					<Switch 
