@@ -3,7 +3,7 @@ import { ChangeSelectedTab } from './actionType.js';
 
 const defaultState = {
 	selectedTab: 'Feed',
-	showNear: false //【👀 新增一个配置数据 -- 第 1 步】 - 默认不显示地图页
+	// showNear: true //【👀 新增一个配置数据 -- 第 1 步】 - 默认不显示地图页 -- 后续改为用 setting 内的 reducer 数据了
 }
 
 export default (state=defaultState, action) => {

@@ -6,7 +6,8 @@ import { changeSelectedTab } from './actionCreator.js'
 // 操作 reducer 的方法
 const mapState = (state) => ({ //相当于映射数据
 	selectedTab: state.HomeReducer.selectedTab,
-	showNear: state.HomeReducer.showNear //【👀 新增一个配置数据 -- 第 2 步】
+	// showNear: state.HomeReducer.showNear //【👀 新增一个配置数据 -- 第 2 步】
+	showNear: state.SettingsReducer.nearSwitch //【👀 新增一个配置数据 -- 使用 setting 的数据】
 })
 
 

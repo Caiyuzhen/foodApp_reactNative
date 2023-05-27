@@ -1,0 +1,1 @@
+export const nearSwitchChange = 'settings/NEAR_SWITCH_CHANGE'

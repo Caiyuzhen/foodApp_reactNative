@@ -34,7 +34,7 @@ export default class Home extends React.Component {
 		const settingIcon = require('../../resources/icon/setting.png')
 		const settingIconSelected = require('../../resources/icon/settingSelected.png')
 
-		const nearItem = null 
+		let nearItem = null 
 		if(this.props.showNear) { //【👀 新增一个配置数据  -  第 3 步】
 			nearItem = <TabNavigator.Item
 					selected={this.props.selectedTab === 'FoodMap'}
