@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import { View, Text, ActionSheetIOS, TouchableOpacity, StyleSheet, Platform, Alert, Animated, AppRegistry, AppState, BackHandler, Dimensions } from "react-native";
+import { View, Text, ActionSheetIOS, TouchableOpacity, StyleSheet, Platform, Alert, Animated, AppRegistry, AppState, BackHandler, Dimensions, Image } from "react-native";
+// import { CameraRoll } from "@react-native-camera-roll/camera-roll";
+import * as MediaLibrary from 'expo-media-library';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
+
+
 
 
 export default class InfoPage extends Component {
-
-
 	constructor(props) {
 		super(props)
 
@@ -14,7 +18,7 @@ export default class InfoPage extends Component {
 			widthAnim: new Animated.Value(0), // 设置初始值
 			heightAnim: new Animated.Value(0), // 设置初始值
 
-			imgUri: []// 初始化存放相册的数据
+			imgUri: null// 初始化存放相册的数据
 		}
 	}
 
@@ -190,22 +194,91 @@ export default class InfoPage extends Component {
 	}
 
 
-	getUserPhotos = () => {
-		// const cameraRoll = useCameraRoll();
 
-		// // 读取相册
-		// CameraRoll.getPhotos({
-		// 	first: 10,
-		// 	assetType: 'Photos'
-		// }).then(res => {
-		// 	this.setState({
-		// 		photos: res.edges
-		// 	})
-		// }).catch(err => {
-		// 	alert(err)
-		// })
+	// // 获取相册中的权限
+	// getUserPhotos = async () => {
+	// 	// 👇 EXPO 的读取相册的 API
+	// 	try {
+	// 		const { status } = await MediaLibrary.requestPermissionsAsync()
+	// 		if (status === "granted") {
+	// 			const { assets } = await MediaLibrary.getAssetsAsync({ first: 10 })
+	// 			this.setState({
+	// 				imgUri: assets[0].uri,
+	// 			})
+	// 		} else {
+	// 			console.log("相册权限被拒绝")
+	// 		}
+	// 		} catch (error) {
+	// 		console.log(error)
+	// 	}
+
+	// 	// 👇原生的读取相册方法
+	// 	// const cameraRoll = useCameraRoll();
+
+	// 	// // 读取相册
+	// 	// CameraRoll.getPhotos({
+	// 	// 	first: 10,
+	// 	// 	assetType: 'Photos'
+	// 	// }).then(res => {
+	// 	// 	this.setState({
+	// 	// 		photos: res.edges
+	// 	// 	})
+	// 	// }).catch(err => {
+	// 	// 	alert(err)
+	// 	// })
+	// }
+
+
+
+	// // 选择图片
+	// pickImage = async () => {
+	// 	try {
+	// 		const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+	// 		if (status === "granted") {
+	// 			const result = await ImagePicker.launchImageLibraryAsync()
+	// 			if (!result.canceled) {
+	// 				// console.log(result.uri)
+	// 				console.log(result.assets[0].uri);
+
+	// 				this.setState({
+	// 					imgUri: result.assets[0].uri,
+	// 				})
+	// 			}
+	// 		} else {
+	// 			console.log("相册权限被拒绝")
+	// 		}
+	// 		} catch (error) {
+	// 			console.log(error)
+	// 	}
+	// }
+
+
+
+	// 检查相册权限并选择图片
+	pickImage = async () => {
+		try {
+			// 检查相册权限
+			const { status: libraryStatus } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+			const { status: assetsStatus } = await MediaLibrary.requestPermissionsAsync();
+			
+			// 判断权限是否被授予
+			if (libraryStatus === 'granted' && assetsStatus === 'granted') {
+				// 选择图片
+				const result = await ImagePicker.launchImageLibraryAsync()
+				if (!result.canceled) {
+					console.log(result.assets[0].uri)
+					this.setState({
+						imgUri: result.assets[0].uri,
+					})
+				}
+			} else {
+				alert('相册权限被拒绝');
+				console.log('相册权限被拒绝')
+			}
+		} catch (error) {
+			console.log(error)
+		}
 	}
-
 
 
 	render() {
@@ -228,16 +301,19 @@ export default class InfoPage extends Component {
 					<Text style={{color: 'white'}}>渐变方块</Text>
 				</Animated.View>
 
-				<TouchableOpacity
+				{/* <TouchableOpacity
 					style={styles.button}
 					onPress={ ()=>{this.getUserPhotos()} }>
 					<Text>读取相册</Text>
+				</TouchableOpacity> */}
+
+				<TouchableOpacity style={styles.button} onPress={this.pickImage}>
+  					<Text>选择照片</Text>
 				</TouchableOpacity>
 
-				{ //👇有图就返回图片
-					this.state.imgUri ? <View></View> : <View><Text>无图片</Text></View>
-					
-				}
+				{/* 👇有图就渲染图片 , 记得设置图片的宽高, 🔥 不然显示不出来！！！*/}
+				{this.state.imgUri && <Image style={styles.image} source={{ uri: this.state.imgUri }} />}
+				{!this.state.imgUri && <View><Text>无图片</Text></View>}
 			</View>
 		)
 	}
@@ -249,6 +325,10 @@ const styles = StyleSheet.create({
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "center",
+	},
+	image: {
+		width: 200,
+		height: 200,
 	},
 	square: {
 		width: 300,
