@@ -93,6 +93,7 @@ export default class Home extends React.Component {
 					}}
 					// renderBadge={() => <CustomBadgeView />} //自定义 badge 组件
 				>
+					{/* 👇 this.props.navigation.navigate 👇 把导航能力传递给了 Feed */}
 					<Feed navigate={this.props.navigation.navigate}  //🔥🔥🔥【第二步】把 Home 页拿到的 navigate 方法传递给 Feed 页面, 以便做详情页的跳转！！
 					/> 
 				</TabNavigator.Item>
@@ -111,7 +112,8 @@ export default class Home extends React.Component {
 						marginBottom: 44, // 文字向上偏移
 					}}
 				>
-					<HotList/> 
+					{/* 👇如果 HostList 也需要进入二级详情页, 就需要传入 navigate={this.props.navigation.navigate}, 然后在 HostList 的 View 的 mapState 内接一下！*/}
+					<HotList navigate={this.props.navigation.navigate}/> 
 				</TabNavigator.Item>
 
 				<TabNavigator.Item

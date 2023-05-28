@@ -19,7 +19,7 @@ export default class App extends React.Component {
 
 	// 请求数据
 	componentDidMount() {
-		fetch('http://192.168.1.15/api/index.json') //首页 feed 的接口数据
+		fetch('http://192.168.1.14/api/index.json') //首页 feed 的接口数据
 		.then((res) => res.json())
 		.then(this.handleGetListSucc)
 		.catch(()=>{alert('请求异常')})

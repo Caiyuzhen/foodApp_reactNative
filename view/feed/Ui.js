@@ -57,7 +57,7 @@ export class Feed extends React.Component {
 									<TouchableWithoutFeedback 
 										key={item.id} // key 要绑定在最外层的元素上！
 										// onPress={ this.handleFoodItemClick.bind(this, item.id) } // 【跳转到详情页】 View 没法绑定点击事件, 所以要使用 TouchableWithoutFeedback
-										onPress={ () => {this.props.navigate('Detail', { id: item.id })} }
+										onPress={ () => {this.props.navigate('Detail', { id: item.id }) } }
 									>
 										<View style={[{width: itemWidth}, styles.itemCard]} //左右 -20px, 然后再等分 3 份屏幕宽度
 										>

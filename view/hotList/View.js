@@ -2,16 +2,16 @@ import { connect } from 'react-redux'
 import { freshDetailPageAction, getDetailPageInfoAction } from './actionCreator.js' //抽象出来的的 action
 // import { HotList } from '../../common/list/Ui.js'
 // import { HotList } from './Ui.js'
-import { HotList } from '../../common/list/Ui.js'
+import { List } from '../../common/list/Ui.js'
 
 
 
-//【容器层 - 负责触发一些逻辑】
-
-const mapState = (state) => {
+//【容器层 - 负责触发一些逻辑】, 🔥🔥 因为 hotList 的 UI 层抽象到 common 里边了, 所以这块的数据实际上是传递给 common 的 UI 组件的 !!！
+const mapState = (state, ownProps) => {
 	return { //在 👆 上边可以通过 this.props.refreshing 拿到 refreshing 这个参数
 		detailPage: state.HotListReducer.detailPage, // -> 因为在 store 内的 allReducer 定义的名称是 DetailPageReducer
-		refreshing: state.HotListReducer.refreshing  // -> 因为在 store 内的 allReducer 定义的名称是 DetailPageReducer
+		refreshing: state.HotListReducer.refreshing,  // -> 因为在 store 内的 allReducer 定义的名称是 DetailPageReducer
+		// navigate: ownProps.navigation.navigate
 	}
 }
 
@@ -39,5 +39,5 @@ const mapDispatch = (dispatch, ownProps) => { //ownProps 是父组件传递过�
 
 
 
-export default connect(mapState, mapDispatch)(HotList) //映射并导出组件
+export default connect(mapState, mapDispatch)(List) //映射并导出组件
 

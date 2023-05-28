@@ -10,10 +10,11 @@ import { DetailPage } from './Ui.js'
 //【容器层 - 负责触发一些逻辑】
 // 👇抽象出 fetch 请求 action 后的写法 ————————————————————————————————————————————————————————————————
 //【🎈第 6 步】 定义一个方法, 获取 reducer 内的 state
-const mapState = (state) => {
+const mapState = (state, ownProps) => { //ownProps 是为了传递 navigate
 	return { //在 👆 上边可以通过 this.props.refreshing 拿到 refreshing 这个参数
 		detailPage: state.DetailPageReducer.detailPage, // -> 因为在 store 内的 allReducer 定义的名称是 DetailPageReducer
-		refreshing: state.DetailPageReducer.refreshing  // -> 因为在 store 内的 allReducer 定义的名称是 DetailPageReducer
+		refreshing: state.DetailPageReducer.refreshing,  // -> 因为在 store 内的 allReducer 定义的名称是 DetailPageReducer
+		navigate: ownProps.navigation.navigate //🔥🔥🔥用来传递 navigation 给 InfoPage 组件!!因为 InfoPage 没有连接 store!
 	}
 }
 

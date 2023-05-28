@@ -1,12 +1,17 @@
 import React from 'react';
-import Home from './view/home/View.js';
-import MyDesign from './view/myDesign/View.js';
-import { DetailPage } from './view/detailPage/index.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Text } from 'react-native'
 import { Provider } from 'react-redux'
 import store from './store/index.js'
+import Home from './view/home/View.js';
+import MyDesign from './view/myDesign/View.js';
+import { DetailPage } from './view/detailPage/index.js';
+import { InfoPage } from './view/InfoPage/index.js'
+import { View as SettingPage } from './view/settings/index.js'
+import { View as FoodMap } from './view/map/index.js'
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +39,7 @@ export class RouterApp extends React.Component {
 					<Stack.Screen 
 						name="Home" 
 						component={Home} 
+						navigation={this.props.navigation}
 						options={{
 							// header: () => null, // 设置为 null 隐藏导航栏
 							headerShown: false, //隐藏标题栏
@@ -49,9 +55,24 @@ export class RouterApp extends React.Component {
 						options={{
 							title: 'Detail',
 							headerStyle: {
-								// backgroundColor: 'rgba(255, 255, 255, 0)',
+								backgroundColor: 'rgba(90, 46, 233, 1)',
 							},
-							headerTintColor: '#4736cd', //标题字颜色
+							headerTintColor: '#ffffff', //标题字颜色
+							headerTitleStyle: {
+								fontWeight: 'bold',
+							},	
+						}}
+					/>
+
+					<Stack.Screen 
+						name="InfoPage" 
+						component={InfoPage} 
+						options={{
+							title: 'InfoPage',
+							headerStyle: {
+								backgroundColor: 'rgba(90, 46, 233, 1)',
+							},
+							headerTintColor: '#ffffff', //标题字颜色
 							headerTitleStyle: {
 								fontWeight: 'bold',
 							},	
@@ -61,6 +82,16 @@ export class RouterApp extends React.Component {
 					<Stack.Screen 
 						name="MyDesign" 
 						component={MyDesign} 
+					/>
+
+					<Stack.Screen 
+						name="FoodMap" 
+						component={FoodMap} 
+					/>
+
+					<Stack.Screen 
+						name="settingPage" 
+						component={SettingPage} 
 					/>
 					
       			</Stack.Navigator>

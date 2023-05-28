@@ -5,10 +5,11 @@ import { settingActionCreator } from '../settings/index.js'
 
 
 // 操作 reducer 的方法
-const mapState = (state) => ({ //相当于映射数据
+const mapState = (state, ownProps) => ({ //相当于映射数据
 	selectedTab: state.HomeReducer.selectedTab,
 	// showNear: state.HomeReducer.showNear //【👀 新增一个配置数据 -- 第 2 步】
-	showNear: state.SettingsReducer.nearSwitch //【👀 新增一个配置数据 -- 使用 setting 的数据】
+	showNear: state.SettingsReducer.nearSwitch, //【👀 新增一个配置数据 -- 使用 setting 的数据】
+	navigate: ownProps.navigation.navigate //🔥🔥🔥用来传递 navigation 给 hotList ! 因为在 App.js 内定义了 Home 组件有 navigation 能力
 })
 
 
