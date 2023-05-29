@@ -13,7 +13,7 @@ export const getSetCategoryAction = (data) => {
 
 export const getFeedInfoAction = () => { //🚀🚀 改造 fetch 获取异步数据的方法, 使其可以通过 redux 来管理
 	return (dispatch) => {
-		fetch('http://192.168.1.14/api/index.json') //首页 feed 的接口数据
+		fetch('http://192.168.1.3/api/index.json') //首页 feed 的接口数据
 			.then( (res) => res.json())
 			.then( (res)=> {
 				if(res.ret && res.data) {

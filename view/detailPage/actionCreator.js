@@ -39,7 +39,7 @@ export const getDetailPageInfoAction = (navigation, coverDate) => { //coverDate 
 
 		if(navigation) {
 			let id = navigation.id // 从路由中拿到对应列表的 id (🔥 在 detailPage -> mapDispatch -> getListData 内进行传递)
-			url = "http://192.168.1.14/api/detailList.json?id=" + id // 拼接 id, 请求对应的数据
+			url = "http://192.168.1.3/api/detailList.json?id=" + id // 拼接 id, 请求对应的数据
 		}
 
 		// 清空详情页数据

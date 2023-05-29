@@ -35,7 +35,7 @@ export const changeDetailPageInfoAction = (resData, isFresh, coverDate) => {
 
 export const getDetailPageInfoAction = (coverDate) => { //coverDate 表示是否覆盖数据
 	return (dispatch) => { //异步请求的操作放到 actionCreator 内进行管理
-		let url = 'http://192.168.1.14/api/detailList.json' 
+		let url = 'http://192.168.1.3/api/detailList.json' 
 
 		// 请求详情页数据
 		fetch(url)

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { View, Text, ActionSheetIOS, TouchableOpacity, StyleSheet, Platform, Alert, Animated, AppRegistry, AppState, BackHandler, Dimensions, Image } from "react-native";
+import { View, Text, TextInput, Keyboard, ActionSheetIOS, TouchableOpacity, StyleSheet, Platform, Alert, Animated, AppRegistry, AppState, BackHandler, Dimensions, Image } from "react-native";
 // import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import * as MediaLibrary from 'expo-media-library';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-
+import * as Location from 'expo-location';
 
 
 
@@ -18,7 +18,9 @@ export default class InfoPage extends Component {
 			widthAnim: new Animated.Value(0), // 设置初始值
 			heightAnim: new Animated.Value(0), // 设置初始值
 
-			imgUri: null// 初始化存放相册的数据
+			imgUri: null,// 初始化存放相册的数据
+
+			takePhotoUri: null, // 初始化存放拍照的数据
 		}
 	}
 
@@ -268,7 +270,7 @@ export default class InfoPage extends Component {
 				if (!result.canceled) {
 					console.log(result.assets[0].uri)
 					this.setState({
-						imgUri: result.assets[0].uri,
+						imgUri: result.assets[0].uri, //取出第 0 张图片
 					})
 				}
 			} else {
@@ -277,6 +279,67 @@ export default class InfoPage extends Component {
 			}
 		} catch (error) {
 			console.log(error)
+		}
+	}
+
+	
+
+	// 获取地理位置
+	getLocation = async () => {
+		try {
+			let { status } = await Location.requestForegroundPermissionsAsync()
+			if (status !== 'granted') {
+				console.log('Permission to access location was denied')
+				return
+			}
+		
+				let location = await Location.getCurrentPositionAsync({}) //⚡️获取当前位置
+					console.log(location)
+					alert(JSON.stringify(location))
+					
+				//⚡️监听设备的位移距离
+				let walkPos = await Location.watchPositionAsync({}, (pos) => {
+					console.log(pos)
+					alert(JSON.stringify(pos))
+				})
+
+
+				// 移除监听位移距离
+				// walkPos.remove()
+			} 
+
+		catch (error) {
+			console.log('Error while retrieving location', error)
+		}
+	}
+
+
+	// 开启摄像头的方法 EXPO 的 ImagePicker
+	openCameraFn = async () => {
+		const { status } = await ImagePicker.requestCameraPermissionsAsync();
+		if (status !== 'granted') {
+			// 权限被拒绝
+			return;
+		}
+
+		const result = await ImagePicker.launchCameraAsync();
+		if (!result.canceled) {
+			// 处理获取到的图像
+			// result.uri 包含了图像的本地路径
+			// 可以将其用作<Image>组件的source或上传到服务器等
+			this.setState({
+				takePhotoUri: result.uri,
+			})
+			console.log('照片地址', result.uri)
+
+			// 看下内存中有没有同样的照片 hasImage
+			const hasImage = await ImagePicker.hasImageAsync(result.uri)
+
+
+			// 把照片从内存中干掉
+			ImagePicker.deleteImageAsync(result.uri)
+			
+			
 		}
 	}
 
@@ -291,6 +354,14 @@ export default class InfoPage extends Component {
 					onPress={ ()=>{this.showActionSheets()} }>
 					<Text>Show Action Sheet</Text>
 				</TouchableOpacity>
+
+				{/* keyboard 输入框 */}
+				<TextInput
+					style={styles.input}
+					onChangeText={text => this.setState({ text })}
+					value={this.state.text}
+					onSubmitEditing={ Keyboard.dismiss }
+				/>
 
 				<Animated.View  // 🚗 动画 API 【第三步】 👈 Animated 后面可以跟 View, Text, Image, ScrollView 等组件 🚗
 					style={[
@@ -311,9 +382,23 @@ export default class InfoPage extends Component {
   					<Text>选择照片</Text>
 				</TouchableOpacity>
 
+
+				<TouchableOpacity style={styles.button} onPress={this.getLocation}>
+  					<Text>获取地理位置</Text>
+				</TouchableOpacity>
+
+
+				<TouchableOpacity style={styles.button} onPress={this.openCameraFn}>
+  					<Text>开启摄像头</Text>
+				</TouchableOpacity>
+
+
 				{/* 👇有图就渲染图片 , 记得设置图片的宽高, 🔥 不然显示不出来！！！*/}
 				{this.state.imgUri && <Image style={styles.image} source={{ uri: this.state.imgUri }} />}
 				{!this.state.imgUri && <View><Text>无图片</Text></View>}
+
+				{this.state.takePhotoUri && <Image style={styles.image} source={{ uri: this.state.takePhotoUri }} />}
+				{!this.state.takePhotoUri && <View><Text>无拍摄图片</Text></View>}
 			</View>
 		)
 	}
@@ -325,6 +410,13 @@ const styles = StyleSheet.create({
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "center",
+	},
+	input: {
+		width: '100%',
+		height: 40,
+		margin: 12,
+		borderWidth: 1,
+		padding: 10,
 	},
 	image: {
 		width: 200,
