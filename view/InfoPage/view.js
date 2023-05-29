@@ -338,8 +338,6 @@ export default class InfoPage extends Component {
 
 			// 把照片从内存中干掉
 			ImagePicker.deleteImageAsync(result.uri)
-			
-			
 		}
 	}
 
