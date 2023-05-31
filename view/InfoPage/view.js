@@ -21,7 +21,9 @@ import {
 	Appearance,
 	Share,
 	Button,
-	Vibration
+	Vibration,
+	ActivityIndicator, //loading
+	Modal,
 } from "react-native";
 // import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import * as MediaLibrary from 'expo-media-library';
@@ -31,6 +33,7 @@ import * as Location from 'expo-location';
 import * as Network from 'expo-network';
 import * as Notifications from 'expo-notifications';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { KeyboardAvoidingView } from "react-native-web"
 
 
 
@@ -50,6 +53,8 @@ export default class InfoPage extends Component {
 
 			date: new Date(),
 			showPicker: false,
+
+			showModal: false,
 		}
 	}
 
@@ -482,6 +487,13 @@ export default class InfoPage extends Component {
 	}
 
 
+	// 设置 Modal 为可见
+	setModalVisible = (isShowModal) => {
+		this.setState({ showModal: isShowModal })
+
+	}
+
+
 	render() {
 		const { date, showPicker } = this.state
 		const pixelRatio = PixelRatio.get() 
@@ -574,8 +586,39 @@ export default class InfoPage extends Component {
 						/>
 					)}
 
+					<ActivityIndicator 
+						size="large" 
+						color="#0000ff" 
+						animating={true} //是否显示
+						// hidesWhenStopped={false} //停止时是否隐藏
+					/>
+
+
 
 					<Button title="震动" onPress={this.handleVibrate} />
+
+
+					<Button title="显示模态弹窗" onPress={ () => {this.setModalVisible(true)} } />
+					<Modal
+						animationType="fade" //模态弹窗的动画类型 slide 从底部滑入  fade 淡入淡出  none 无动画
+						transparent={true}
+						visible={this.state.showModal}
+						onRequestClose={() => {
+							Alert.alert('Modal has been closed.'); () => {this.setModalVisible(false)}}
+						}>
+						<View style={styles.centeredView}>
+							<View style={styles.modalView}>
+								<Text style={styles.modalText}>Hello World!</Text>
+								<TouchableOpacity
+									style={[styles.button]}
+									onPress={ () => this.setModalVisible(false) }>
+								<Text style={styles.textStyle}>Hide Modal</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+					</Modal>
+
+					
 
 
 					{/* 👇有图就渲染图片 , 记得设置图片的宽高, 🔥 不然显示不出来！！！*/}
@@ -628,5 +671,37 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		color: "#ffffff",
 		textAlign: "center",
+	},
+	centeredView: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginTop: 22,
+	},
+	modalView: {
+		margin: 20,
+		backgroundColor: 'white',
+		borderRadius: 16,
+		padding: 35,
+		alignItems: 'center',
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5,
+		width: 280,
+		height: 400,
+	},
+	textStyle: {
+		color: 'white',
+		fontWeight: 'bold',
+		textAlign: 'center',
+	},
+		modalText: {
+		marginBottom: 15,
+		textAlign: 'center',
 	},
 })
