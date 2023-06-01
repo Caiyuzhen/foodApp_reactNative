@@ -5,7 +5,12 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2cd245ab-6602-4025-9f94-2b1813034d19"
+      }
+    }
   },
   "name": "foodApp"
 }

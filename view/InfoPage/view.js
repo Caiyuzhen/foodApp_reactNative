@@ -24,6 +24,7 @@ import {
 	Vibration,
 	ActivityIndicator, //loading
 	Modal,
+	SnapshotViewIOS, //包裹组件后, 可以知道里边的组件被加载完了没有
 } from "react-native";
 // import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import * as MediaLibrary from 'expo-media-library';
